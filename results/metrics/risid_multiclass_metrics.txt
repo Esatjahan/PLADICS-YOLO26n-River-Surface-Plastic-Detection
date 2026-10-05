@@ -1,0 +1,19 @@
+RiSID Multiclass (YOLO26n)
+=========================
+
+Dataset:
+RiSID (Multiclass)
+
+Overall Metrics:
+- Precision: ~0.684
+- Recall: ~0.688
+- mAP@0.5: ~0.732
+- mAP@0.5:0.95: ~0.482
+
+Observations:
+- Balanced performance across multiple classes
+- Some classes perform better than others
+- Multiclass detection is more complex than single-class
+
+Conclusion:
+RiSID multiclass provides strong category-level detection and is suitable for research analysis.

@@ -1,0 +1,8 @@
+metric,mean,std
+num_images,12.0,
+top5_hit_original_bbox,0.3657702732364871,0.2725814796090213
+top5_hit_expanded_bbox,0.5632619469443522,0.3304009808166877
+inside_ratio_original_bbox,0.30983359578752107,0.2374938594912813
+inside_ratio_expanded_bbox,0.4476121041465933,0.24411402727972553
+centroid_inside_original_bbox,0.5,
+centroid_inside_expanded_bbox,0.6666666666666666,

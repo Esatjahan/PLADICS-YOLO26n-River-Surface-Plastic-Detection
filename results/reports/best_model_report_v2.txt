@@ -1,0 +1,66 @@
+PLADICS YOLO MODEL COMPARISON REPORT V2 (UPDATED)
+================================================
+
+FINAL BASELINE MODEL (CLEAN VALIDATION)
+--------------------------------------
+Model: yolo26n_v2 (Merged Plastic Dataset)
+Precision: 0.856
+Recall: 0.762
+mAP50: 0.837
+mAP50_95: 0.522
+
+Remarks:
+- Labels cleaned and normalized
+- Corrupt annotations removed
+- Stable validation achieved (no warnings, no corrupt data)
+- This is the most reliable and reproducible result
+
+
+PREVIOUS BASELINE (FOR REFERENCE)
+--------------------------------
+Model: yolo26n (Initial Run)
+Precision: 0.8341
+Recall: 0.7382
+mAP50: 0.7896
+mAP50_95: 0.4582
+
+
+COMPARISON SUMMARY
+------------------
+Improvement after dataset cleaning and validation:
+
+Precision:   +0.022
+Recall:      +0.024
+mAP50:       +0.047
+mAP50_95:    +0.064
+
+→ Significant improvement observed, especially in localization (mAP50-95)
+
+
+FINAL BEST MODEL
+----------------
+Model: yolo26n_v2
+Precision: 0.856
+Recall: 0.762
+mAP50: 0.837
+mAP50_95: 0.522
+Weight Size (MB): ~5.4
+Best Weight Path:
+D:/PLADICS/experiments_precision/yolo26n_v2/weights/best.pt
+
+
+EXPERIMENT NOTE
+---------------
+Further experiments performed:
+- High resolution training (imgsz=768) → performance decreased
+- Fine-tuning with aggressive augmentation → unstable
+- Soft augmentation strategy → no improvement
+- Controlled fine-tuning → no significant gain
+
+Conclusion:
+→ yolo26n_v2 remains the optimal model under current dataset constraints
+
+
+OVERALL SCORING FORMULA
+-----------------------
+OverallScore = 0.40*mAP50 + 0.30*mAP50_95 + 0.20*Precision + 0.10*Recall

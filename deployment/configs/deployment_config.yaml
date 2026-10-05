@@ -1,0 +1,147 @@
+# ==========================================
+# PLADICS Deployment Configuration
+# Timezone: Bangladesh Standard Time
+# ==========================================
+
+project:
+  name: PLADICS
+  mode: hardware_prototype
+  timezone: Asia/Dhaka
+  timezone_label: BDT
+
+hardware:
+  platform: Raspberry Pi 4
+  camera: Raspberry Pi Camera Module V2
+  collector: Conveyor belt
+  motor_driver: L298N
+
+paths:
+  model_path_windows: D:/PLADICS/experiments_clean_final/yolo26n_clean_100/weights/best.pt
+  model_path_pi: /home/esatjahan/PLADICS_PI/models/best_ncnn_model
+
+camera:
+  source_windows: 0
+  source_pi: 0
+  width: 640
+  height: 480
+  fps: 30
+
+model:
+  name: yolo26n_clean_100_ncnn
+  imgsz: 416
+  confidence_threshold: 0.20
+  iou_threshold: 0.45
+  tracker: /home/esatjahan/PLADICS_PI/deployment/trackers/pladics_bytetrack.yaml
+
+  acceptance_confidence: 0.40
+  minimum_bbox_area: 1200
+  maximum_bbox_area_ratio: 0.55
+navigation:
+  left_zone_ratio: 0.33
+  right_zone_ratio: 0.66
+  collect_area_threshold: 45000
+
+actions:
+  search: SEARCH
+  turn_left: TURN_LEFT
+  turn_right: TURN_RIGHT
+  move_forward: MOVE_FORWARD
+  stop: STOP
+  collect: COLLECT
+
+mission_states:
+  searching: SEARCHING
+  tracking: TRACKING
+  moving: MOVING
+  collecting: COLLECTING
+  obstacle: OBSTACLE
+  idle: IDLE
+
+ultrasonic:
+  enabled: false
+  trig_pin: 5
+  echo_pin: 6
+  obstacle_distance_cm: 20
+
+gpio:
+  enabled: true
+
+  numbering_mode: BCM
+  direction_change_delay_seconds: 0.15
+
+  pwm_enabled: false
+
+  left_motor:
+    channel: MOTOR_A
+    output_ports: OUT1_OUT2
+
+    in1: 17
+    in2: 27
+
+    forward_direction: DIRECTION_A
+
+  right_motor:
+    channel: MOTOR_B
+    output_ports: OUT3_OUT4
+
+    # Final tested wiring:
+    # GPIO23 -> IN3
+    # GPIO22 -> IN4
+    in3: 23
+    in4: 22
+
+    forward_direction: DIRECTION_B
+
+motor:
+  enabled: true
+  pwm_enabled: false
+
+  base_speed: 100
+  turn_speed: 100
+  search_speed: 100
+
+  gentle_turn_enabled: true
+  pivot_turn_enabled: true
+
+  stop_before_direction_change: true
+  direction_change_delay_seconds: 0.15
+
+conveyor:
+  enabled: true
+  control_pin: 24
+  active_state: LOW
+  run_time_seconds: 5
+  power_source: separate_battery
+
+collection:
+  cooldown_seconds: 5.0
+
+telemetry:
+  log_fps: true
+  log_inference_time: true
+  log_cpu: true
+  log_ram: true
+  log_temperature: true
+  log_distance: true
+  log_conveyor: true
+  log_obstacle: true
+
+graphs:
+  enabled: true
+  dpi: 300
+  format: png
+
+iot:
+  enabled: true
+  protocol: MQTT
+  broker: localhost
+  port: 1883
+  topic_live: pladics/live
+  topic_event: pladics/event
+  publish_interval_seconds: 1
+
+safety:
+  stop_on_obstacle: true
+  stop_on_no_camera: true
+  stop_on_model_error: true
+  manual_quit_key: q

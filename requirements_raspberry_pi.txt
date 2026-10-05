@@ -1,0 +1,12 @@
+ultralytics
+opencv-python
+numpy
+pyyaml
+flask
+paho-mqtt
+psutil
+tqdm
+Pillow
+
+picamera2
+RPi.GPIO

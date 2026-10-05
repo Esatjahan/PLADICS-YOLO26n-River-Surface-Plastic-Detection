@@ -1,0 +1,94 @@
+PLADICS Demo Steps
+=================
+
+1. Activate Environment
+Command:
+D:\PLADICS\venv\Scripts\Activate.ps1
+
+Explain:
+Activating Python virtual environment for the project.
+
+------------------------------------------------------------
+
+2. Show Project Structure
+Command:
+dir D:\PLADICS
+
+Explain:
+Displaying organized project folders (datasets, experiments, results, scripts).
+
+------------------------------------------------------------
+
+3. Show Dataset Configuration
+Command:
+type D:\PLADICS\merged_dataset\plastic.yaml
+
+Explain:
+Showing dataset configuration used for training.
+
+------------------------------------------------------------
+
+4. Show Dataset Size
+Command:
+(dir D:\PLADICS\merged_dataset\images\train).Count
+
+Explain:
+Showing number of training images.
+
+------------------------------------------------------------
+
+5. Run Model Comparison
+Command:
+python D:\PLADICS\scripts\compare_models_v2.py
+
+Explain:
+Comparing YOLO models using validation metrics.
+
+------------------------------------------------------------
+
+6. Show Best Model Report
+Command:
+type D:\PLADICS\results\reports\best_model_report_v2.txt
+
+Explain:
+Displaying best model based on evaluation metrics.
+
+------------------------------------------------------------
+
+7. Show Final Model Selection
+Command:
+type D:\PLADICS\results\reports\final_model_selection.txt
+
+Explain:
+Showing reasoning behind selecting YOLO26n.
+
+------------------------------------------------------------
+
+8. Show Multiclass Dataset (RiSID)
+Command:
+dir D:\PLADICS\datasets_multiclass\risid_multiclass
+
+Explain:
+Displaying multiclass dataset structure.
+
+------------------------------------------------------------
+
+9. Show Riverine Dataset
+Command:
+dir D:\PLADICS\datasets_multiclass\riverine_multiclass
+
+Explain:
+Showing reconstructed Riverine dataset.
+
+------------------------------------------------------------
+
+10. Run Webcam Detection
+Command:
+python D:\PLADICS\scripts\detect_webcam.py
+
+Explain:
+Real-time plastic detection using YOLO26n.
+
+------------------------------------------------------------
+
+End of Demo

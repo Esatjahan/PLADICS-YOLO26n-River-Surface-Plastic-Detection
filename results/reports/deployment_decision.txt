@@ -1,0 +1,22 @@
+PLADICS Deployment Decision
+==========================
+
+Final Selected Model:
+YOLO26n (Single-Class, Merged Dataset)
+
+Reason:
+- Highest overall weighted score among all models
+- Highest precision, resulting in fewer false positives
+- Strong mAP@0.5:0.95 indicating better localization accuracy
+- Stable real-time performance observed during webcam testing
+
+Deployment Objective:
+The primary objective of PLADICS is to detect the presence of floating plastic for collection, not to classify plastic subtypes.
+
+Therefore, single-class detection is more aligned with real-world deployment.
+
+Multiclass Role:
+Multiclass models (RiSID and Riverine) were trained for research validation and category-level analysis, but are not used for deployment.
+
+Conclusion:
+YOLO26n trained on the merged single-class dataset is selected as the final deployment model.

@@ -1,0 +1,4 @@
+Experiment,Precision,Recall,mAP50,mAP50_95
+Merged Single-Class,0.8341,0.7382,0.7896,0.4582
+RiSID Multiclass,0.684,0.688,0.732,0.482
+Riverine Multiclass,0.564,0.659,0.714,0.396

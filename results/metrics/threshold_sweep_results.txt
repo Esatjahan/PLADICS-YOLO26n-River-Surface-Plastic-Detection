@@ -1,0 +1,27 @@
+Threshold Sweep Results (YOLO26n_v2)
+
+Validation Set Results:
+conf=0.10 -> P=0.8580 | R=0.7594 | F1=0.8057 | mAP50=0.8367 | mAP50-95=0.5142
+conf=0.15 -> P=0.8580 | R=0.7594 | F1=0.8057 | mAP50=0.8391 | mAP50-95=0.5188
+conf=0.20 -> P=0.8580 | R=0.7594 | F1=0.8057 | mAP50=0.8362 | mAP50-95=0.5194
+conf=0.25 -> P=0.8580 | R=0.7594 | F1=0.8057 | mAP50=0.8364 | mAP50-95=0.5219
+conf=0.30 -> P=0.8517 | R=0.7666 | F1=0.8069 | mAP50=0.8320 | mAP50-95=0.5225
+conf=0.40 -> P=0.8794 | R=0.7417 | F1=0.8047 | mAP50=0.8225 | mAP50-95=0.5209
+conf=0.50 -> P=0.9075 | R=0.6920 | F1=0.7852 | mAP50=0.8043 | mAP50-95=0.5159
+conf=0.60 -> P=0.9323 | R=0.6232 | F1=0.7471 | mAP50=0.7769 | mAP50-95=0.5073
+conf=0.70 -> P=0.9536 | R=0.5206 | F1=0.6735 | mAP50=0.7331 | mAP50-95=0.4900
+
+Best Validation Thresholds:
+Best F1 threshold        : 0.30
+Best Precision threshold : 0.70
+Best mAP50-95 threshold  : 0.30
+
+Test Set Check at conf=0.30:
+Precision   : 0.8242
+Recall      : 0.7330
+F1 Score    : 0.7760
+mAP50       : 0.7991
+mAP50-95    : 0.4728
+
+Final Decision:
+The default confidence threshold (0.25) was retained because the validation-selected threshold (0.30) did not improve final test-set performance.

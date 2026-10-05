@@ -1,0 +1,33 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+nanodet_env/
+
+# Training outputs
+runs/
+wandb/
+logs/
+
+# Temporary files
+temp_train/
+temp_val/
+
+# Large files
+*.pt
+*.pth
+*.onnx
+*.mp4
+*.zip
+
+# Dataset folders
+datasets/
+datasets_clean/
+datasets_multiclass/
+merged_dataset/
+
+# OS files
+.DS_Store
+Thumbs.db

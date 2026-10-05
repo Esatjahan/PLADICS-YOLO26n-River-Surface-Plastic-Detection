@@ -1,0 +1,21 @@
+mission_id: '003'
+mission_folder: mission_003_2026-07-07_14-36-27_BDT
+date: '2026-07-07'
+time: '14:36:27'
+timezone: Asia/Dhaka
+timezone_label: BDT
+status: Completed
+project: PLADICS
+mode: hardware_prototype
+model: yolo26n_clean
+imgsz: 640
+confidence_threshold: 0.35
+iou_threshold: 0.45
+platform_config: Raspberry Pi 4
+camera_config: Raspberry Pi Camera Module V2
+collector: Conveyor belt
+motor_driver: L298N
+running_os: Windows
+last_updated_date: '2026-07-07'
+last_updated_time: '14:41:00'
+last_updated_timezone: BDT

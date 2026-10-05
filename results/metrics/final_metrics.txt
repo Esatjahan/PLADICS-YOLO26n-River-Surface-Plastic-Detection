@@ -1,0 +1,68 @@
+PLADICS Final Metrics Report
+===========================
+
+Dataset:
+Merged dataset (RiSID + Riverine Plastic Litter Dataset)
+
+Dataset Size:
+- Training images: 5168
+- Validation images: 1663
+- Test images: 928
+- Total images: 7759
+
+------------------------------------------------------------
+
+Selected Model:
+YOLO26n
+
+Alternative Model:
+YOLO11n
+
+------------------------------------------------------------
+
+Final Model Performance (YOLO26n)
+--------------------------------
+
+Precision: 0.8341
+Recall: 0.7382
+mAP@0.5: 0.7896
+mAP@0.5:0.95: 0.4582
+
+------------------------------------------------------------
+
+Alternative Model Performance (YOLO11n)
+--------------------------------------
+
+Precision: 0.8284
+Recall: 0.7623
+mAP@0.5: 0.7984
+mAP@0.5:0.95: 0.4207
+
+------------------------------------------------------------
+
+Interpretation:
+
+- YOLO26n provides the highest precision and best mAP@0.5:0.95,
+  indicating strong localization and fewer false positives.
+
+- YOLO11n provides higher recall and mAP@0.5,
+  indicating better detection coverage.
+
+------------------------------------------------------------
+
+Final Decision:
+
+YOLO26n is selected as the final model based on:
+- Highest overall score
+- Better precision (fewer false detections)
+- Strong localization performance
+
+------------------------------------------------------------
+
+Deployment Model Path:
+
+D:\PLADICS\experiments\yolo26n\weights\best.pt
+
+------------------------------------------------------------
+
+End of Metrics Report

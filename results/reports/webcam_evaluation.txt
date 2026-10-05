@@ -1,0 +1,63 @@
+PLADICS Webcam Evaluation Report
+================================
+
+Model Evaluated:
+YOLO26n (Single-Class, Merged Dataset)
+
+Evaluation Setup:
+- Input: Laptop webcam (real-time video)
+- Confidence threshold: 0.40
+- Environment: indoor / normal lighting conditions
+
+------------------------------------------------------------
+
+Detection Performance:
+
+- The model successfully detects plastic objects in real-time.
+- Detection is stable across consecutive frames.
+- Bounding boxes remain consistent and do not flicker significantly.
+
+------------------------------------------------------------
+
+Confidence Behavior:
+
+- Confidence values are generally consistent.
+- Most detections appear above the threshold (0.40).
+- High-confidence detections (>0.70) are stable and reliable.
+
+------------------------------------------------------------
+
+False Positives:
+
+- The model produces relatively low false positives.
+- Occasional incorrect detections may occur on visually similar objects.
+- Overall false detection rate is acceptable for deployment.
+
+------------------------------------------------------------
+
+Real-Time Performance:
+
+- The model runs smoothly in real-time.
+- Frame processing is fast enough for continuous monitoring.
+- No major lag observed during inference.
+
+------------------------------------------------------------
+
+Robustness:
+
+- Detection performance remains stable under slight camera movement.
+- Performance is affected under poor lighting conditions, but still functional.
+
+------------------------------------------------------------
+
+Conclusion:
+
+YOLO26n demonstrates stable and reliable real-time detection performance.
+
+It provides:
+- consistent detection
+- acceptable confidence levels
+- low false positives
+- smooth real-time operation
+
+Therefore, it is suitable for deployment in the PLADICS system for real-time plastic detection.

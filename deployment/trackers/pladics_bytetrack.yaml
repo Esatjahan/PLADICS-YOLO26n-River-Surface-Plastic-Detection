@@ -1,0 +1,67 @@
+# ==========================================================
+# PLADICS ByteTrack Configuration
+# ==========================================================
+# Purpose:
+#   Target continuity tracking for floating plastic objects
+#
+# System:
+#   PLADICS
+#   Plastic Detection and Intelligent Collection System
+#
+# Tracker:
+#   ByteTrack
+#
+# Used with:
+#   YOLO26n plastic detector
+# ==========================================================
+
+# Tracker type
+tracker_type: bytetrack
+
+# ==========================================================
+# Detection thresholds
+# ==========================================================
+
+# New track creation confidence threshold
+track_high_thresh: 0.40
+
+# Low confidence detections used for secondary association
+track_low_thresh: 0.10
+
+# Threshold for removing lost tracks
+new_track_thresh: 0.40
+
+# ==========================================================
+# Track management
+# ==========================================================
+
+# Maximum frames a lost object can remain alive
+track_buffer: 30
+
+# Minimum matching threshold between frames
+match_thresh: 0.80
+
+# ==========================================================
+# Motion estimation
+# ==========================================================
+
+# Enable motion compensation
+fuse_score: True
+
+# ==========================================================
+# PLADICS deployment notes
+# ==========================================================
+#
+# Additional target stability logic is implemented
+# inside the PLADICS deployment controller:
+#
+# - Track ID continuity
+# - Target displacement checking
+# - Bounding box area ratio validation
+# - Stable collection frame requirement
+#
+# These parameters are controlled from:
+#
+# deployment_config.yaml
+#
+# ==========================================================

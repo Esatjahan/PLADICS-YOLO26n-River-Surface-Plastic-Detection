@@ -1,0 +1,20 @@
+Riverine Multiclass (YOLO26n)
+============================
+
+Dataset:
+Riverine Plastic Litter Dataset (Multiclass)
+
+Overall Metrics:
+- Precision: ~0.564
+- Recall: ~0.659
+- mAP@0.5: ~0.714
+- mAP@0.5:0.95: ~0.396
+
+Observations:
+- Dataset is small (~142 annotated samples)
+- Class imbalance present
+- Lower performance compared to RiSID
+- plastic_cup class shows weaker detection
+
+Conclusion:
+Riverine dataset is useful for validation and generalization testing, but not strong enough for primary training.

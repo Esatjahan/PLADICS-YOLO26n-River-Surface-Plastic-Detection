@@ -1,0 +1,540 @@
+[
+  {
+    "id": "tab_pladics",
+    "type": "tab",
+    "label": "PLADICS IoT Dashboard",
+    "disabled": false,
+    "info": ""
+  },
+  {
+    "id": "ui_tab_main",
+    "type": "ui_tab",
+    "name": "PLADICS",
+    "icon": "dashboard",
+    "order": 1,
+    "disabled": false,
+    "hidden": false
+  },
+  {
+    "id": "grp_live",
+    "type": "ui_group",
+    "name": "Live Monitoring",
+    "tab": "ui_tab_main",
+    "order": 1,
+    "disp": true,
+    "width": "12",
+    "collapse": false
+  },
+  {
+    "id": "grp_graph",
+    "type": "ui_group",
+    "name": "Live Graphs",
+    "tab": "ui_tab_main",
+    "order": 2,
+    "disp": true,
+    "width": "12",
+    "collapse": false
+  },
+  {
+    "id": "grp_system",
+    "type": "ui_group",
+    "name": "System Health",
+    "tab": "ui_tab_main",
+    "order": 3,
+    "disp": true,
+    "width": "12",
+    "collapse": false
+  },
+  {
+    "id": "mqtt_broker",
+    "type": "mqtt-broker",
+    "name": "Local Mosquitto",
+    "broker": "localhost",
+    "port": "1883",
+    "clientid": "pladics_dashboard",
+    "autoConnect": true,
+    "usetls": false,
+    "protocolVersion": "4",
+    "keepalive": "60",
+    "cleansession": true
+  },
+  {
+    "id": "mqtt_in",
+    "type": "mqtt in",
+    "z": "tab_pladics",
+    "name": "PLADICS Live MQTT",
+    "topic": "pladics/live",
+    "qos": "0",
+    "datatype": "json",
+    "broker": "mqtt_broker",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "x": 150,
+    "y": 100,
+    "wires": [
+      [
+        "fn_split"
+      ]
+    ]
+  },
+  {
+    "id": "fn_split",
+    "type": "function",
+    "z": "tab_pladics",
+    "name": "Split telemetry",
+    "func": "\nlet p = msg.payload;\n\nreturn [\n    {payload: p.plastic_count},\n    {payload: Number(p.confidence)},\n    {payload: Number(p.fps)},\n    {payload: Number(p.inference_ms)},\n    {payload: p.mission_state},\n    {payload: p.action},\n    {payload: p.conveyor_state},\n    {payload: p.obstacle_detected},\n    {payload: Number(p.cpu_usage_percent)},\n    {payload: Number(p.ram_usage_percent)},\n    {payload: Number(p.cpu_temperature)},\n    {payload: p.collection_count},\n    {payload: p.frame}\n];\n",
+    "outputs": 13,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 390,
+    "y": 100,
+    "wires": [
+      [
+        "txt_plastic",
+        "chart_detection"
+      ],
+      [
+        "gauge_conf",
+        "chart_conf"
+      ],
+      [
+        "gauge_fps",
+        "chart_fps"
+      ],
+      [
+        "gauge_inf",
+        "chart_inf"
+      ],
+      [
+        "txt_state"
+      ],
+      [
+        "txt_action"
+      ],
+      [
+        "txt_conveyor"
+      ],
+      [
+        "txt_obstacle"
+      ],
+      [
+        "gauge_cpu"
+      ],
+      [
+        "gauge_ram"
+      ],
+      [
+        "gauge_temp"
+      ],
+      [
+        "txt_collection"
+      ],
+      [
+        "txt_frame"
+      ]
+    ]
+  },
+  {
+    "id": "txt_plastic",
+    "type": "ui_text",
+    "z": "tab_pladics",
+    "group": "grp_live",
+    "order": 1,
+    "width": "3",
+    "height": "1",
+    "name": "Plastic Count",
+    "label": "Plastic Count",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "x": 690,
+    "y": 40,
+    "wires": []
+  },
+  {
+    "id": "gauge_conf",
+    "type": "ui_gauge",
+    "z": "tab_pladics",
+    "name": "Confidence",
+    "group": "grp_live",
+    "order": 2,
+    "width": "3",
+    "height": "3",
+    "gtype": "gage",
+    "title": "Confidence",
+    "label": "",
+    "format": "{{value}}",
+    "min": 0,
+    "max": "1",
+    "colors": [
+      "#ff4444",
+      "#ffbb33",
+      "#00C851"
+    ],
+    "seg1": "0.5",
+    "seg2": "0.75",
+    "x": 690,
+    "y": 80,
+    "wires": []
+  },
+  {
+    "id": "gauge_fps",
+    "type": "ui_gauge",
+    "z": "tab_pladics",
+    "name": "FPS",
+    "group": "grp_live",
+    "order": 3,
+    "width": "3",
+    "height": "3",
+    "gtype": "gage",
+    "title": "FPS",
+    "label": "fps",
+    "format": "{{value}}",
+    "min": 0,
+    "max": "30",
+    "colors": [
+      "#ff4444",
+      "#ffbb33",
+      "#00C851"
+    ],
+    "seg1": "5",
+    "seg2": "12",
+    "x": 680,
+    "y": 120,
+    "wires": []
+  },
+  {
+    "id": "gauge_inf",
+    "type": "ui_gauge",
+    "z": "tab_pladics",
+    "name": "Inference",
+    "group": "grp_live",
+    "order": 4,
+    "width": "3",
+    "height": "3",
+    "gtype": "gage",
+    "title": "Inference",
+    "label": "ms",
+    "format": "{{value}}",
+    "min": 0,
+    "max": "500",
+    "colors": [
+      "#00C851",
+      "#ffbb33",
+      "#ff4444"
+    ],
+    "seg1": "100",
+    "seg2": "250",
+    "x": 690,
+    "y": 160,
+    "wires": []
+  },
+  {
+    "id": "txt_state",
+    "type": "ui_text",
+    "z": "tab_pladics",
+    "group": "grp_live",
+    "order": 5,
+    "width": "3",
+    "height": "1",
+    "name": "Mission State",
+    "label": "Mission State",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "x": 700,
+    "y": 210,
+    "wires": []
+  },
+  {
+    "id": "txt_action",
+    "type": "ui_text",
+    "z": "tab_pladics",
+    "group": "grp_live",
+    "order": 6,
+    "width": "3",
+    "height": "1",
+    "name": "Action",
+    "label": "Action",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "x": 680,
+    "y": 250,
+    "wires": []
+  },
+  {
+    "id": "txt_conveyor",
+    "type": "ui_text",
+    "z": "tab_pladics",
+    "group": "grp_live",
+    "order": 7,
+    "width": "3",
+    "height": "1",
+    "name": "Conveyor",
+    "label": "Conveyor",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "x": 690,
+    "y": 290,
+    "wires": []
+  },
+  {
+    "id": "txt_obstacle",
+    "type": "ui_text",
+    "z": "tab_pladics",
+    "group": "grp_live",
+    "order": 8,
+    "width": "3",
+    "height": "1",
+    "name": "Obstacle",
+    "label": "Obstacle",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "x": 690,
+    "y": 330,
+    "wires": []
+  },
+  {
+    "id": "txt_collection",
+    "type": "ui_text",
+    "z": "tab_pladics",
+    "group": "grp_live",
+    "order": 9,
+    "width": "3",
+    "height": "1",
+    "name": "Collection Count",
+    "label": "Collection Count",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "x": 710,
+    "y": 370,
+    "wires": []
+  },
+  {
+    "id": "txt_frame",
+    "type": "ui_text",
+    "z": "tab_pladics",
+    "group": "grp_live",
+    "order": 10,
+    "width": "3",
+    "height": "1",
+    "name": "Frame",
+    "label": "Frame",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "x": 680,
+    "y": 410,
+    "wires": []
+  },
+  {
+    "id": "chart_detection",
+    "type": "ui_chart",
+    "z": "tab_pladics",
+    "name": "Detection Count Chart",
+    "group": "grp_graph",
+    "order": 1,
+    "width": "6",
+    "height": "4",
+    "label": "Detection Count vs Time",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "HH:mm:ss",
+    "interpolate": "linear",
+    "nodata": "Waiting for data...",
+    "dot": false,
+    "ymin": "0",
+    "ymax": "",
+    "removeOlder": "5",
+    "removeOlderPoints": "",
+    "removeOlderUnit": "60",
+    "cutout": 0,
+    "useOneColor": false,
+    "colors": [
+      "#00C851"
+    ],
+    "outputs": 1,
+    "x": 730,
+    "y": 470,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "chart_conf",
+    "type": "ui_chart",
+    "z": "tab_pladics",
+    "name": "Confidence Chart",
+    "group": "grp_graph",
+    "order": 2,
+    "width": "6",
+    "height": "4",
+    "label": "Confidence vs Time",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "HH:mm:ss",
+    "interpolate": "linear",
+    "nodata": "Waiting for data...",
+    "dot": false,
+    "ymin": "0",
+    "ymax": "1",
+    "removeOlder": "5",
+    "removeOlderPoints": "",
+    "removeOlderUnit": "60",
+    "cutout": 0,
+    "useOneColor": false,
+    "colors": [
+      "#33b5e5"
+    ],
+    "outputs": 1,
+    "x": 710,
+    "y": 510,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "chart_fps",
+    "type": "ui_chart",
+    "z": "tab_pladics",
+    "name": "FPS Chart",
+    "group": "grp_graph",
+    "order": 3,
+    "width": "6",
+    "height": "4",
+    "label": "FPS vs Time",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "HH:mm:ss",
+    "interpolate": "linear",
+    "nodata": "Waiting for data...",
+    "dot": false,
+    "ymin": "0",
+    "ymax": "",
+    "removeOlder": "5",
+    "removeOlderPoints": "",
+    "removeOlderUnit": "60",
+    "cutout": 0,
+    "useOneColor": false,
+    "colors": [
+      "#ffbb33"
+    ],
+    "outputs": 1,
+    "x": 690,
+    "y": 550,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "chart_inf",
+    "type": "ui_chart",
+    "z": "tab_pladics",
+    "name": "Inference Chart",
+    "group": "grp_graph",
+    "order": 4,
+    "width": "6",
+    "height": "4",
+    "label": "Inference Time vs Time",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "HH:mm:ss",
+    "interpolate": "linear",
+    "nodata": "Waiting for data...",
+    "dot": false,
+    "ymin": "0",
+    "ymax": "",
+    "removeOlder": "5",
+    "removeOlderPoints": "",
+    "removeOlderUnit": "60",
+    "cutout": 0,
+    "useOneColor": false,
+    "colors": [
+      "#ff4444"
+    ],
+    "outputs": 1,
+    "x": 710,
+    "y": 590,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "gauge_cpu",
+    "type": "ui_gauge",
+    "z": "tab_pladics",
+    "name": "CPU",
+    "group": "grp_system",
+    "order": 1,
+    "width": "4",
+    "height": "3",
+    "gtype": "gage",
+    "title": "CPU Usage",
+    "label": "%",
+    "format": "{{value}}",
+    "min": 0,
+    "max": "100",
+    "colors": [
+      "#00C851",
+      "#ffbb33",
+      "#ff4444"
+    ],
+    "seg1": "50",
+    "seg2": "80",
+    "x": 670,
+    "y": 650,
+    "wires": []
+  },
+  {
+    "id": "gauge_ram",
+    "type": "ui_gauge",
+    "z": "tab_pladics",
+    "name": "RAM",
+    "group": "grp_system",
+    "order": 2,
+    "width": "4",
+    "height": "3",
+    "gtype": "gage",
+    "title": "RAM Usage",
+    "label": "%",
+    "format": "{{value}}",
+    "min": 0,
+    "max": "100",
+    "colors": [
+      "#00C851",
+      "#ffbb33",
+      "#ff4444"
+    ],
+    "seg1": "50",
+    "seg2": "80",
+    "x": 670,
+    "y": 690,
+    "wires": []
+  },
+  {
+    "id": "gauge_temp",
+    "type": "ui_gauge",
+    "z": "tab_pladics",
+    "name": "Temperature",
+    "group": "grp_system",
+    "order": 3,
+    "width": "4",
+    "height": "3",
+    "gtype": "gage",
+    "title": "CPU Temperature",
+    "label": "C",
+    "format": "{{value}}",
+    "min": 0,
+    "max": "90",
+    "colors": [
+      "#00C851",
+      "#ffbb33",
+      "#ff4444"
+    ],
+    "seg1": "55",
+    "seg2": "75",
+    "x": 700,
+    "y": 730,
+    "wires": []
+  }
+]

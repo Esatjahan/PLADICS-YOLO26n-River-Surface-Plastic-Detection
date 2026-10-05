@@ -1,0 +1,115 @@
+PLADICS Final Comparison Summary (UPDATED)
+=========================================
+
+Experiments Conducted:
+
+1. Merged Single-Class Dataset (YOLOv8n, YOLOv10n, YOLO11n, YOLO26n)
+2. Refined Single-Class Dataset (YOLO26n_v2 with cleaned labels)
+3. RiSID Multiclass Dataset (YOLO26n)
+4. Riverine Multiclass Dataset (YOLO26n)
+
+------------------------------------------------------------
+
+Performance Comparison:
+
+Merged Single-Class (YOLO26n - Initial Baseline):
+- Precision: 0.8341
+- Recall: 0.7382
+- mAP@0.5: 0.7896
+- mAP@0.5:0.95: 0.4582
+
+Refined Single-Class (YOLO26n_v2 - Final Model):
+- Precision: 0.856
+- Recall: 0.762
+- mAP@0.5: 0.837
+- mAP@0.5:0.95: 0.522
+→ Best overall performance after dataset cleaning
+
+RiSID Multiclass (YOLO26n):
+- Precision: ~0.684
+- Recall: ~0.688
+- mAP@0.5: ~0.732
+- mAP@0.5:0.95: ~0.482
+→ Balanced multiclass performance
+
+Riverine Multiclass (YOLO26n):
+- Precision: ~0.564
+- Recall: ~0.659
+- mAP@0.5: ~0.714
+- mAP@0.5:0.95: ~0.396
+→ Lower performance due to limited dataset size
+
+------------------------------------------------------------
+
+Impact of Dataset Refinement:
+
+Comparison between initial and refined single-class model:
+
+- Precision:   +0.022
+- Recall:      +0.024
+- mAP@0.5:     +0.047
+- mAP@0.5:0.95:+0.064
+
+Key Insight:
+→ Dataset cleaning and label normalization significantly improved detection quality,
+especially localization (mAP@0.5:0.95)
+
+------------------------------------------------------------
+
+Important Considerations:
+
+- Single-class and multiclass experiments represent different problem formulations.
+- Single-class detection focuses on plastic presence detection.
+- Multiclass detection introduces classification complexity and class imbalance.
+
+Therefore:
+→ Direct comparison between these setups is not appropriate.
+
+------------------------------------------------------------
+
+Dataset Impact Analysis:
+
+- RiSID dataset (larger, diverse) → stable and balanced performance
+- Riverine dataset (small, limited samples) → reduced performance
+- Dataset size, annotation quality, and class balance directly influence model accuracy
+
+------------------------------------------------------------
+
+Experimental Observations:
+
+Additional experiments were conducted:
+
+- High-resolution training (imgsz=768) → performance decreased
+- Aggressive augmentation → unstable results
+- Fine-tuning strategies → no significant improvement
+
+Key Finding:
+→ Data quality improvement has a greater impact than hyperparameter tuning
+
+------------------------------------------------------------
+
+Deployment Interpretation:
+
+The PLADICS system requires:
+
+- reliable plastic detection
+- minimal false positives
+- accurate localization
+
+This aligns directly with single-class detection.
+
+------------------------------------------------------------
+
+Final Conclusion:
+
+- YOLO26n_v2 trained on the refined merged dataset is the best-performing configuration.
+- Dataset refinement provided measurable and consistent performance gains.
+- Multiclass experiments support research validation but are not optimal for deployment.
+
+------------------------------------------------------------
+
+Summary:
+
+- Best Deployment Model: YOLO26n_v2 (Refined Single-Class)
+- Best Multiclass Dataset: RiSID
+- Supporting Validation Dataset: Riverine

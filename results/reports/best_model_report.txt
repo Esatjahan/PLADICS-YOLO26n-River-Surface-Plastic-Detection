@@ -1,0 +1,65 @@
+PLADICS YOLO Model Comparison Report
+===================================
+
+BEST BY PRECISION
+-----------------
+Model: yolo26n
+Precision: 0.8341
+Recall: 0.7382
+mAP50: 0.7896
+mAP50_95: 0.4582
+
+BEST BY RECALL
+--------------
+Model: yolo11n
+Precision: 0.8284
+Recall: 0.7623
+mAP50: 0.7984
+mAP50_95: 0.4207
+
+BEST BY mAP@0.5
+---------------
+Model: yolo11n
+Precision: 0.8284
+Recall: 0.7623
+mAP50: 0.7984
+mAP50_95: 0.4207
+
+BEST OVERALL
+------------
+Model: yolo26n
+OverallScore: 0.6939
+Precision: 0.8341
+Recall: 0.7382
+mAP50: 0.7896
+mAP50_95: 0.4582
+Weight Size (MB): 5.12
+Training Hours: 24.18
+Best Weight Path: D:\PLADICS\experiments\yolo26n\weights\best.pt
+
+Overall scoring formula:
+OverallScore = 0.40*mAP50 + 0.30*mAP50_95 + 0.20*Precision + 0.10*Recall
+
+------------------------------------------------------------
+
+Interpretation:
+YOLO26n achieved the highest overall weighted score and the highest precision,
+indicating stronger detection reliability and fewer false positives.
+
+YOLO11n achieved the highest recall and mAP@0.5,
+indicating better detection coverage and sensitivity.
+
+------------------------------------------------------------
+
+Final Validation-Based Conclusion:
+YOLO26n is selected as the best-performing model based on overall evaluation.
+
+------------------------------------------------------------
+
+Deployment Note:
+Final deployment suitability will be confirmed through real-time webcam testing,
+as validation metrics may not fully represent real-world performance.
+
+------------------------------------------------------------
+
+End of Report

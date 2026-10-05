@@ -1,0 +1,139 @@
+PLADICS Training Summary
+=======================
+
+Project:
+Plastic Detection and Intelligent Collection System (PLADICS)
+
+------------------------------------------------------------
+
+Dataset Preparation:
+--------------------
+
+- Combined two datasets:
+  1. RiSID (River Surface Image Dataset)
+  2. Riverine Plastic Litter Dataset
+
+- Converted annotations:
+  XML → YOLO format
+
+- Merged datasets into unified structure
+
+- All classes converted into a single class:
+  "plastic"
+
+------------------------------------------------------------
+
+Final Dataset Structure:
+-----------------------
+
+merged_dataset/
+├── images/
+│   ├── train/
+│   ├── val/
+│   └── test/
+├── labels/
+│   ├── train/
+│   ├── val/
+│   └── test/
+└── plastic.yaml
+
+------------------------------------------------------------
+
+Dataset Statistics:
+-------------------
+
+- Training images: 5168
+- Validation images: 1663
+- Test images: 928
+- Total images: 7759
+
+------------------------------------------------------------
+
+Training Configuration:
+----------------------
+
+- Model type: YOLO (Ultralytics)
+- Models trained:
+  - YOLOv8n
+  - YOLOv10n
+  - YOLO11n
+  - YOLO26n
+
+- Image size: 640 × 640
+- Epochs: 40
+- Batch size: 8
+- Device: CPU
+- Workers: 0
+
+------------------------------------------------------------
+
+Training Environment:
+---------------------
+
+- Python version: 3.11.9
+- Ultralytics YOLO version: 8.4.24
+- Hardware: CPU (Intel i5 12th Gen)
+- Training method: CLI-based YOLO training
+
+------------------------------------------------------------
+
+Training Output:
+----------------
+
+Each model generated:
+
+- results.csv
+- results.png
+- confusion matrix
+- precision-recall curves
+- validation prediction images
+- best.pt (best model)
+- last.pt (final model)
+
+------------------------------------------------------------
+
+Experiment Directory:
+---------------------
+
+D:\PLADICS\experiments\
+├── yolov8n\
+├── yolov10n\
+├── yolo11n\
+└── yolo26n\
+
+------------------------------------------------------------
+
+Model Comparison:
+-----------------
+
+Models were compared using:
+
+- Precision
+- Recall
+- mAP@0.5
+- mAP@0.5:0.95
+- Weighted Overall Score
+
+------------------------------------------------------------
+
+Conclusion:
+-----------
+
+- YOLO26n achieved the best overall performance
+- YOLO11n achieved highest recall and mAP@0.5
+- Final model selected: YOLO26n
+
+------------------------------------------------------------
+
+Next Steps:
+-----------
+
+- Real-time webcam evaluation
+- Object tracking (Centroid / DeepSORT)
+- Rover navigation integration
+- IoT-based monitoring system
+- Final research paper preparation
+
+------------------------------------------------------------
+
+End of Training Summary

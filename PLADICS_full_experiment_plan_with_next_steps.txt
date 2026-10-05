@@ -1,0 +1,494 @@
+Phase 1 — Multiclass YOLO26n
+1) RiSID 2-class train
+yolo detect train model=D:/PLADICS/yolo26n.pt data=D:/PLADICS/datasets_clean/RiSID_2class_clean/dataset.yaml epochs=50 imgsz=640 batch=8 device=cpu workers=0 project=D:/PLADICS/experiments_multiclass_clean name=risid2_yolo26n
+Test:
+yolo detect val model=D:/PLADICS/experiments_multiclass_clean/risid2_yolo26n/weights/best.pt data=D:/PLADICS/datasets_clean/RiSID_2class_clean/dataset.yaml split=test imgsz=640 batch=8 device=cpu workers=0 project=D:/PLADICS/experiments_multiclass_clean name=risid2_yolo26n_test
+2) RiSID 5-class train
+yolo detect train model=D:/PLADICS/yolo26n.pt data=D:/PLADICS/datasets_clean/RiSID_5class_clean/dataset.yaml epochs=50 imgsz=640 batch=8 device=cpu workers=0 project=D:/PLADICS/experiments_multiclass_clean name=risid5_yolo26n
+Test:
+yolo detect val model=D:/PLADICS/experiments_multiclass_clean/risid5_yolo26n/weights/best.pt data=D:/PLADICS/datasets_clean/RiSID_5class_clean/dataset.yaml split=test imgsz=640 batch=8 device=cpu workers=0 project=D:/PLADICS/experiments_multiclass_clean name=risid5_yolo26n_test
+3) RiSID 7-class train
+yolo detect train model=D:/PLADICS/yolo26n.pt data=D:/PLADICS/datasets_clean/RiSID_7class_clean/dataset.yaml epochs=50 imgsz=640 batch=8 device=cpu workers=0 project=D:/PLADICS/experiments_multiclass_clean name=risid7_yolo26n
+Test:
+yolo detect val model=D:/PLADICS/experiments_multiclass_clean/risid7_yolo26n/weights/best.pt data=D:/PLADICS/datasets_clean/RiSID_7class_clean/dataset.yaml split=test imgsz=640 batch=8 device=cpu workers=0 project=D:/PLADICS/experiments_multiclass_clean name=risid7_yolo26n_test
+4) Riverine 5-class train
+yolo detect train model=D:/PLADICS/yolo26n.pt data=D:/PLADICS/datasets_clean/Riverine_5class_clean/dataset.yaml epochs=50 imgsz=640 batch=4 device=cpu workers=0 project=D:/PLADICS/experiments_multiclass_clean name=riverine5_yolo26n
+Test:
+yolo detect val model=D:/PLADICS/experiments_multiclass_clean/riverine5_yolo26n/weights/best.pt data=D:/PLADICS/datasets_clean/Riverine_5class_clean/dataset.yaml split=test imgsz=640 batch=4 device=cpu workers=0 project=D:/PLADICS/experiments_multiclass_clean name=riverine5_yolo26n_test
+
+
+
+PHASE 1B — Multiclass (S1: Scratch)
+yolo detect train \
+model=yolo26n.yaml \
+data=D:/PLADICS/datasets_clean/RiSID_5class_clean/dataset.yaml \
+epochs=50 imgsz=640 batch=8 device=cpu workers=0 \
+project=D:/PLADICS/experiments_multiclass_clean \
+name=risid5_yolo26n_scratch
+
+Test:
+yolo detect val \
+model=D:/PLADICS/experiments_multiclass_clean/risid5_yolo26n_scratch/weights/best.pt \
+data=D:/PLADICS/datasets_clean/RiSID_5class_clean/dataset.yaml \
+split=test imgsz=640 batch=8 device=cpu workers=0
+
+Phase 2 — Single-class main benchmark
+Dataset:
+D:/PLADICS/datasets_clean/merged_clean_dataset/plastic_clean.yaml
+5) YOLOv8n train
+yolo detect train model=yolov8n.pt data=D:/PLADICS/datasets_clean/merged_clean_dataset/plastic_clean.yaml epochs=50 imgsz=640 batch=8 device=cpu workers=0 project=D:/PLADICS/experiments_clean_final name=yolov8n_clean
+Test:
+yolo detect val model=D:/PLADICS/experiments_clean_final/yolov8n_clean/weights/best.pt data=D:/PLADICS/datasets_clean/merged_clean_dataset/plastic_clean.yaml split=test imgsz=640 batch=8 device=cpu workers=0 project=D:/PLADICS/experiments_clean_final name=yolov8n_clean_test
+6) YOLOv10n train
+yolo detect train model=yolov10n.pt data=D:/PLADICS/datasets_clean/merged_clean_dataset/plastic_clean.yaml epochs=50 imgsz=640 batch=8 device=cpu workers=0 project=D:/PLADICS/experiments_clean_final name=yolov10n_clean
+Test:
+yolo detect val model=D:/PLADICS/experiments_clean_final/yolov10n_clean/weights/best.pt data=D:/PLADICS/datasets_clean/merged_clean_dataset/plastic_clean.yaml split=test imgsz=640 batch=8 device=cpu workers=0 project=D:/PLADICS/experiments_clean_final name=yolov10n_clean_test
+7) YOLO11n train
+yolo detect train model=yolo11n.pt data=D:/PLADICS/datasets_clean/merged_clean_dataset/plastic_clean.yaml epochs=50 imgsz=640 batch=8 device=cpu workers=0 project=D:/PLADICS/experiments_clean_final name=yolo11n_clean
+Test:
+yolo detect val model=D:/PLADICS/experiments_clean_final/yolo11n_clean/weights/best.pt data=D:/PLADICS/datasets_clean/merged_clean_dataset/plastic_clean.yaml split=test imgsz=640 batch=8 device=cpu workers=0 project=D:/PLADICS/experiments_clean_final name=yolo11n_clean_test
+8) YOLO26n 100 epoch train
+yolo detect train model=D:/PLADICS/yolo26n.pt data=D:/PLADICS/datasets_clean/merged_clean_dataset/plastic_clean.yaml epochs=100 imgsz=640 batch=8 device=cpu workers=0 project=D:/PLADICS/experiments_clean_final name=yolo26n_clean_100
+Test:
+yolo detect val model=D:/PLADICS/experiments_clean_final/yolo26n_clean_100/weights/best.pt data=D:/PLADICS/datasets_clean/merged_clean_dataset/plastic_clean.yaml split=test imgsz=640 batch=8 device=cpu workers=0 project=D:/PLADICS/experiments_clean_final name=yolo26n_clean_100_test
+9) YOLO26s train
+yolo detect train model=D:/PLADICS/yolo26s.pt data=D:/PLADICS/datasets_clean/merged_clean_dataset/plastic_clean.yaml epochs=50 imgsz=640 batch=8 device=cpu workers=0 project=D:/PLADICS/experiments_clean_final name=yolo26s_clean
+Test:
+yolo detect val model=D:/PLADICS/experiments_clean_final/yolo26s_clean/weights/best.pt data=D:/PLADICS/datasets_clean/merged_clean_dataset/plastic_clean.yaml split=test imgsz=640 batch=8 device=cpu workers=0 project=D:/PLADICS/experiments_clean_final name=yolo26s_clean_test
+
+Phase 3 — YOLO26n image-size experiment
+10) YOLO26n imgsz 416
+yolo detect train model=D:/PLADICS/yolo26n.pt data=D:/PLADICS/datasets_clean/merged_clean_dataset/plastic_clean.yaml epochs=50 imgsz=416 batch=8 device=cpu workers=0 project=D:/PLADICS/experiments_imgsize name=yolo26n_img416
+Test:
+yolo detect val model=D:/PLADICS/experiments_imgsize/yolo26n_img416/weights/best.pt data=D:/PLADICS/datasets_clean/merged_clean_dataset/plastic_clean.yaml split=test imgsz=416 batch=8 device=cpu workers=0 project=D:/PLADICS/experiments_imgsize name=yolo26n_img416_test
+11) YOLO26n imgsz 768
+yolo detect train model=D:/PLADICS/yolo26n.pt data=D:/PLADICS/datasets_clean/merged_clean_dataset/plastic_clean.yaml epochs=50 imgsz=768 batch=4 device=cpu workers=0 project=D:/PLADICS/experiments_imgsize name=yolo26n_img768
+Test:
+yolo detect val model=D:/PLADICS/experiments_imgsize/yolo26n_img768/weights/best.pt data=D:/PLADICS/datasets_clean/merged_clean_dataset/plastic_clean.yaml split=test imgsz=768 batch=4 device=cpu workers=0 project=D:/PLADICS/experiments_imgsize name=yolo26n_img768_test
+
+Phase 4 — Real-time test
+Final selected model দিয়ে webcam test:
+yolo detect predict model=D:/PLADICS/experiments_clean_final/yolo26n_clean_100/weights/best.pt source=0 imgsz=640 conf=0.25
+YOLO26s comparison webcam:
+yolo detect predict model=D:/PLADICS/experiments_clean_final/yolo26s_clean/weights/best.pt source=0 imgsz=640 conf=0.25
+আগে Phase 1 শেষ করো: RiSID 2, 5, 7 + Riverine 5. Then results আমাকে দাও.
+
+============================================================
+NEXT STEPS ADDED — PHASE 5, PHASE 6, PHASE 7
+============================================================
+
+Phase 5 — YOLO26n + YOLO11n Ensemble Evaluation
+
+Goal:
+YOLO26n baseline er sathe YOLO11n add kore check kora je precision, recall, mAP improve hoy kina.
+
+Important:
+Ei phase ta single-class merged plastic dataset er upor korba.
+
+Required trained models:
+1) YOLO26n:
+D:/PLADICS/experiments_clean_final/yolo26n_clean_100/weights/best.pt
+
+2) YOLO11n:
+D:/PLADICS/experiments_clean_final/yolo11n_clean/weights/best.pt
+
+Dataset:
+D:/PLADICS/datasets_clean/merged_clean_dataset/plastic_clean.yaml
+
+Step 1 — Install required package:
+pip install ensemble-boxes
+
+Step 2 — Create script folder:
+D:/PLADICS/scripts
+
+Step 3 — Create this file:
+D:/PLADICS/scripts/wbf_ensemble_predict.py
+
+Code:
+------------------------------------------------------------
+from ultralytics import YOLO
+from ensemble_boxes import weighted_boxes_fusion
+import cv2
+import os
+import yaml
+from pathlib import Path
+
+model_paths = [
+    "D:/PLADICS/experiments_clean_final/yolo26n_clean_100/weights/best.pt",
+    "D:/PLADICS/experiments_clean_final/yolo11n_clean/weights/best.pt"
+]
+
+test_images_dir = "D:/PLADICS/datasets_clean/merged_clean_dataset/images/test"
+output_dir = "D:/PLADICS/experiments_ensemble/yolo26n_yolo11n_wbf_predictions"
+os.makedirs(output_dir, exist_ok=True)
+
+models = [YOLO(p) for p in model_paths]
+
+conf_thres = 0.25
+iou_thr = 0.55
+skip_box_thr = 0.001
+imgsz = 640
+
+for img_name in os.listdir(test_images_dir):
+    if not img_name.lower().endswith((".jpg", ".jpeg", ".png")):
+        continue
+
+    img_path = os.path.join(test_images_dir, img_name)
+    img = cv2.imread(img_path)
+
+    if img is None:
+        print("Could not read:", img_path)
+        continue
+
+    h, w = img.shape[:2]
+
+    boxes_list = []
+    scores_list = []
+    labels_list = []
+
+    for model in models:
+        result = model(img_path, imgsz=imgsz, conf=conf_thres, verbose=False)[0]
+
+        boxes = []
+        scores = []
+        labels = []
+
+        for box in result.boxes:
+            x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
+            conf = float(box.conf[0].cpu().numpy())
+            cls = int(box.cls[0].cpu().numpy())
+
+            # Normalize boxes for WBF
+            boxes.append([
+                max(0, x1 / w),
+                max(0, y1 / h),
+                min(1, x2 / w),
+                min(1, y2 / h)
+            ])
+            scores.append(conf)
+            labels.append(cls)
+
+        boxes_list.append(boxes)
+        scores_list.append(scores)
+        labels_list.append(labels)
+
+    if len(boxes_list[0]) == 0 and len(boxes_list[1]) == 0:
+        cv2.imwrite(os.path.join(output_dir, img_name), img)
+        continue
+
+    boxes, scores, labels = weighted_boxes_fusion(
+        boxes_list,
+        scores_list,
+        labels_list,
+        weights=[1, 1],
+        iou_thr=iou_thr,
+        skip_box_thr=skip_box_thr
+    )
+
+    for box, score, label in zip(boxes, scores, labels):
+        x1 = int(box[0] * w)
+        y1 = int(box[1] * h)
+        x2 = int(box[2] * w)
+        y2 = int(box[3] * h)
+
+        cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
+        cv2.putText(
+            img,
+            f"plastic {score:.2f}",
+            (x1, max(20, y1 - 5)),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.6,
+            (0, 255, 0),
+            2
+        )
+
+    cv2.imwrite(os.path.join(output_dir, img_name), img)
+
+print("WBF ensemble prediction complete.")
+------------------------------------------------------------
+
+Run:
+python D:/PLADICS/scripts/wbf_ensemble_predict.py
+
+Expected output:
+D:/PLADICS/experiments_ensemble/yolo26n_yolo11n_wbf_predictions
+
+Ruthless note:
+Ei script visual prediction dibe. Official precision/recall/mAP compare korte hole fused prediction ke YOLO label/txt format e save kore evaluation korte hobe. Tai next script lagbe.
+
+
+Phase 5B — WBF Ensemble Label Export for Evaluation
+
+Goal:
+WBF fused prediction ke YOLO txt label format e save kora, jate later custom evaluation kora jay.
+
+Create file:
+D:/PLADICS/scripts/wbf_ensemble_export_labels.py
+
+Code:
+------------------------------------------------------------
+from ultralytics import YOLO
+from ensemble_boxes import weighted_boxes_fusion
+import cv2
+import os
+from pathlib import Path
+
+model_paths = [
+    "D:/PLADICS/experiments_clean_final/yolo26n_clean_100/weights/best.pt",
+    "D:/PLADICS/experiments_clean_final/yolo11n_clean/weights/best.pt"
+]
+
+test_images_dir = "D:/PLADICS/datasets_clean/merged_clean_dataset/images/test"
+output_label_dir = "D:/PLADICS/experiments_ensemble/yolo26n_yolo11n_wbf_labels"
+os.makedirs(output_label_dir, exist_ok=True)
+
+models = [YOLO(p) for p in model_paths]
+
+conf_thres = 0.25
+iou_thr = 0.55
+skip_box_thr = 0.001
+imgsz = 640
+
+for img_name in os.listdir(test_images_dir):
+    if not img_name.lower().endswith((".jpg", ".jpeg", ".png")):
+        continue
+
+    img_path = os.path.join(test_images_dir, img_name)
+    img = cv2.imread(img_path)
+
+    if img is None:
+        print("Could not read:", img_path)
+        continue
+
+    h, w = img.shape[:2]
+
+    boxes_list = []
+    scores_list = []
+    labels_list = []
+
+    for model in models:
+        result = model(img_path, imgsz=imgsz, conf=conf_thres, verbose=False)[0]
+
+        boxes = []
+        scores = []
+        labels = []
+
+        for box in result.boxes:
+            x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
+            conf = float(box.conf[0].cpu().numpy())
+            cls = int(box.cls[0].cpu().numpy())
+
+            boxes.append([
+                max(0, x1 / w),
+                max(0, y1 / h),
+                min(1, x2 / w),
+                min(1, y2 / h)
+            ])
+            scores.append(conf)
+            labels.append(cls)
+
+        boxes_list.append(boxes)
+        scores_list.append(scores)
+        labels_list.append(labels)
+
+    label_file = os.path.join(output_label_dir, Path(img_name).stem + ".txt")
+
+    if len(boxes_list[0]) == 0 and len(boxes_list[1]) == 0:
+        open(label_file, "w").close()
+        continue
+
+    boxes, scores, labels = weighted_boxes_fusion(
+        boxes_list,
+        scores_list,
+        labels_list,
+        weights=[1, 1],
+        iou_thr=iou_thr,
+        skip_box_thr=skip_box_thr
+    )
+
+    with open(label_file, "w") as f:
+        for box, score, label in zip(boxes, scores, labels):
+            x1, y1, x2, y2 = box
+
+            x_center = (x1 + x2) / 2
+            y_center = (y1 + y2) / 2
+            bw = x2 - x1
+            bh = y2 - y1
+
+            f.write(f"{int(label)} {x_center:.6f} {y_center:.6f} {bw:.6f} {bh:.6f} {score:.6f}\n")
+
+print("WBF ensemble labels exported.")
+------------------------------------------------------------
+
+Run:
+python D:/PLADICS/scripts/wbf_ensemble_export_labels.py
+
+Output:
+D:/PLADICS/experiments_ensemble/yolo26n_yolo11n_wbf_labels
+
+
+Phase 6 — YOLO26n + ByteTrack Deployment
+
+Goal:
+YOLO26n ke tracking er sathe use kora, jate frame-by-frame random detection na hoy. Same plastic object ke ID diye track korbe.
+
+Command for webcam:
+yolo track model=D:/PLADICS/experiments_clean_final/yolo26n_clean_100/weights/best.pt source=0 imgsz=640 conf=0.25 tracker=bytetrack.yaml project=D:/PLADICS/experiments_tracking name=yolo26n_bytetrack_webcam
+
+Command for test video:
+yolo track model=D:/PLADICS/experiments_clean_final/yolo26n_clean_100/weights/best.pt source=D:/PLADICS/test_video.mp4 imgsz=640 conf=0.25 tracker=bytetrack.yaml project=D:/PLADICS/experiments_tracking name=yolo26n_bytetrack_video
+
+Expected output:
+D:/PLADICS/experiments_tracking/yolo26n_bytetrack_webcam
+D:/PLADICS/experiments_tracking/yolo26n_bytetrack_video
+
+Research writing line:
+YOLO26n was combined with ByteTrack to improve temporal consistency during real-time deployment. Instead of treating each frame independently, the tracker assigns object IDs across consecutive frames, reducing unstable rover responses caused by intermittent detections.
+
+
+Phase 6B — ByteTrack + Temporal Filter + Priority Decision
+
+Goal:
+Rover control er jonno tracking output use kore stable target select kora.
+
+Create file:
+D:/PLADICS/scripts/yolo26n_bytetrack_priority.py
+
+Code:
+------------------------------------------------------------
+from ultralytics import YOLO
+import cv2
+from collections import defaultdict
+
+model_path = "D:/PLADICS/experiments_clean_final/yolo26n_clean_100/weights/best.pt"
+model = YOLO(model_path)
+
+source = 0
+cap = cv2.VideoCapture(source)
+
+conf_thres = 0.25
+imgsz = 640
+
+track_history = defaultdict(int)
+min_stable_frames = 5
+
+alpha = 0.5   # bbox area weight
+beta = 0.3    # confidence weight
+gamma = 0.2   # center alignment weight
+
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+
+    h, w = frame.shape[:2]
+
+    results = model.track(
+        frame,
+        imgsz=imgsz,
+        conf=conf_thres,
+        tracker="bytetrack.yaml",
+        persist=True,
+        verbose=False
+    )[0]
+
+    candidates = []
+
+    if results.boxes is not None and results.boxes.id is not None:
+        for box, track_id in zip(results.boxes, results.boxes.id):
+            x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
+            conf = float(box.conf[0].cpu().numpy())
+            tid = int(track_id.cpu().numpy())
+
+            track_history[tid] += 1
+
+            bw = x2 - x1
+            bh = y2 - y1
+            area = (bw * bh) / (w * h)
+
+            cx = (x1 + x2) / 2
+            center_alignment = 1 - abs(cx - (w / 2)) / (w / 2)
+
+            priority = alpha * area + beta * conf + gamma * center_alignment
+
+            if track_history[tid] >= min_stable_frames:
+                candidates.append({
+                    "track_id": tid,
+                    "box": [x1, y1, x2, y2],
+                    "conf": conf,
+                    "area": area,
+                    "cx": cx,
+                    "priority": priority
+                })
+
+    if len(candidates) == 0:
+        action = "SEARCH"
+        target = None
+    else:
+        target = max(candidates, key=lambda x: x["priority"])
+        cx = target["cx"]
+        area = target["area"]
+
+        if cx < w / 3:
+            action = "MOVE LEFT"
+        elif cx > 2 * w / 3:
+            action = "MOVE RIGHT"
+        else:
+            action = "MOVE FORWARD"
+
+        if area > 0.20:
+            action = "STOP AND COLLECT"
+
+    if target is not None:
+        x1, y1, x2, y2 = target["box"]
+        tid = target["track_id"]
+
+        cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2)
+        cv2.putText(frame, f"ID:{tid} P:{target['priority']:.2f}", (int(x1), int(y1)-10),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+
+    cv2.putText(frame, f"Action: {action}", (20, 40),
+                cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 255), 2)
+
+    cv2.imshow("YOLO26n + ByteTrack + Priority Decision", frame)
+
+    if cv2.waitKey(1) & 0xFF == ord("q"):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+------------------------------------------------------------
+
+Run:
+python D:/PLADICS/scripts/yolo26n_bytetrack_priority.py
+
+Important:
+area > 0.20 eta fixed threshold. Real rover e camera distance er upor depend korbe. Experiment kore threshold tune korte hobe.
+
+
+Phase 7 — Final Result Table Preparation
+
+After all experiments, collect metrics from:
+1) D:/PLADICS/experiments_multiclass_clean
+2) D:/PLADICS/experiments_clean_final
+3) D:/PLADICS/experiments_imgsize
+4) D:/PLADICS/experiments_ensemble
+5) D:/PLADICS/experiments_tracking
+
+Final table format:
+Model / Method | Dataset | Classes | Precision | Recall | mAP50 | mAP50-95 | FPS | Model Size | Purpose
+
+Rows:
+1) YOLOv8n | merged single-class | 1 | ... | ... | ... | ... | ... | ... | baseline
+2) YOLOv10n | merged single-class | 1 | ... | ... | ... | ... | ... | ... | baseline
+3) YOLO11n | merged single-class | 1 | ... | ... | ... | ... | ... | ... | ensemble partner
+4) YOLO26n | merged single-class | 1 | ... | ... | ... | ... | ... | ... | deployment model
+5) YOLO26s | merged single-class | 1 | ... | ... | ... | ... | ... | ... | high-capacity comparison
+6) YOLO26n + YOLO11n WBF | merged single-class | 1 | ... | ... | ... | ... | ... | ... | ensemble accuracy test
+7) YOLO26n + ByteTrack | webcam/video | 1 | N/A | N/A | N/A | N/A | ... | ... | deployment stability
+
+Final methodology upgrade line:
+The final deployment pipeline uses YOLO26n as the primary lightweight detector. For accuracy-oriented analysis, YOLO26n is further combined with YOLO11n using Weighted Box Fusion. For real-time rover deployment, YOLO26n is integrated with ByteTrack, temporal filtering, and priority-based target selection to improve stability and decision-making during autonomous plastic collection.
+
+Final ruthless note:
+Ensemble is for accuracy analysis. ByteTrack is for deployment stability. Do not mix these two claims. Ensemble may improve precision/recall/mAP. ByteTrack improves temporal consistency and rover behavior, not official image-level mAP directly.

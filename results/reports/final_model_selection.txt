@@ -1,0 +1,191 @@
+PLADICS Final Model Selection Report (UPDATED)
+=============================================
+
+Project:
+Plastic Detection and Intelligent Collection System (PLADICS)
+
+Dataset:
+Merged Dataset (RiSID + Riverine Plastic Litter Dataset)
+
+Total Images:
+- Training: 5168
+- Validation: 1663
+- Test: 928
+- Total: 7759
+
+------------------------------------------------------------
+
+1. Training Configuration
+------------------------
+
+All YOLO models were trained using consistent baseline settings:
+
+- Image size: 640 × 640
+- Epochs: 40
+- Batch size: 8
+- Device: CPU
+- Dataset: Single-class ("plastic")
+
+Additional refinement experiments were conducted on the best-performing model.
+
+------------------------------------------------------------
+
+2. Model Performance (Validation Metrics)
+----------------------------------------
+
+YOLOv8n:
+- Precision: 0.734
+- Recall: 0.692
+- mAP@0.5: 0.728
+- mAP@0.5:0.95: 0.375
+
+YOLOv10n:
+- Precision: 0.635
+- Recall: 0.688
+- mAP@0.5: 0.671
+- mAP@0.5:0.95: 0.339
+
+YOLO11n:
+- Precision: 0.8284
+- Recall: 0.7623
+- mAP@0.5: 0.7984
+- mAP@0.5:0.95: 0.4207
+
+YOLO26n (Initial Baseline):
+- Precision: 0.8341
+- Recall: 0.7382
+- mAP@0.5: 0.7896
+- mAP@0.5:0.95: 0.4582
+
+YOLO26n_v2 (Final Refined Model):
+- Precision: 0.856   ← Highest Precision
+- Recall: 0.762
+- mAP@0.5: 0.837     ← Highest mAP@0.5
+- mAP@0.5:0.95: 0.522 ← Highest mAP@0.5:0.95
+
+------------------------------------------------------------
+
+3. Experimental Refinement Summary
+---------------------------------
+
+Several controlled experiments were conducted to improve performance:
+
+- Label normalization and cleaning (critical improvement step)
+- Removal of corrupt annotations
+- Stable validation pipeline established
+- High-resolution training (imgsz=768) → performance degraded
+- Aggressive augmentation → unstable results
+- Controlled fine-tuning → no significant gain
+
+Key finding:
+→ Data quality improvement had the largest impact on performance
+
+------------------------------------------------------------
+
+4. Automated Model Comparison
+-----------------------------
+
+OverallScore = 0.40 × mAP50 + 0.30 × mAP50-95 + 0.20 × Precision + 0.10 × Recall
+
+Best performing model across all criteria:
+
+- BEST PRECISION: YOLO26n_v2
+- BEST mAP@0.5: YOLO26n_v2
+- BEST mAP@0.5:0.95: YOLO26n_v2
+- BEST OVERALL: YOLO26n_v2
+
+------------------------------------------------------------
+
+5. Interpretation of Results
+----------------------------
+
+YOLO26n_v2 achieved the highest performance across all major metrics.
+
+This indicates:
+
+- improved detection reliability
+- reduced false positives
+- significantly improved localization accuracy
+- better generalization after dataset cleaning
+
+Compared to initial YOLO26n baseline, improvements include:
+
+- higher precision
+- higher recall
+- strong increase in mAP@0.5:0.95 (localization quality)
+
+------------------------------------------------------------
+
+6. Deployment-Oriented Consideration
+-----------------------------------
+
+The PLADICS system focuses on real-time detection of floating plastic.
+
+Key priorities:
+
+- high precision (avoid false actions)
+- stable detection
+- accurate localization
+
+Single-class detection is sufficient for deployment since:
+
+- plastic presence detection is the primary goal
+- classification of plastic type is not required for rover action
+
+------------------------------------------------------------
+
+7. Final Model Selection
+-----------------------
+
+Selected Model (Deployment):
+YOLO26n_v2
+
+Alternative Model:
+YOLO11n
+
+------------------------------------------------------------
+
+8. Justification
+----------------
+
+YOLO26n_v2 is selected as the final deployment model based on:
+
+- highest precision among all models
+- highest mAP@0.5 and mAP@0.5:0.95
+- improved localization performance
+- stable and reproducible validation results
+- robustness after dataset cleaning
+
+These characteristics make it highly suitable for real-time robotic deployment.
+
+YOLO11n remains a strong alternative due to slightly higher recall in earlier experiments.
+
+------------------------------------------------------------
+
+9. Multiclass Experiment Context
+-------------------------------
+
+Additional multiclass experiments (RiSID and Riverine) showed:
+
+- expected performance drop due to increased task complexity
+- dataset-dependent variation
+- stronger results on larger datasets (RiSID)
+
+These experiments support research analysis but are not used for deployment selection.
+
+------------------------------------------------------------
+
+10. Deployment Model Path
+------------------------
+
+Primary:
+D:/PLADICS/experiments_precision/yolo26n_v2/weights/best.pt
+
+------------------------------------------------------------
+
+Final Statement
+---------------
+
+After comprehensive experimentation, dataset refinement, and controlled evaluation, YOLO26n_v2 is selected as the optimal model for the PLADICS system.
+
+It provides the best balance of precision, localization accuracy, and deployment reliability, meeting the requirements for real-time plastic detection in autonomous collection systems.
