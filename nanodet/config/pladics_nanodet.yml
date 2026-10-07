@@ -1,0 +1,100 @@
+save_dir: workspace/pladics_nanodet
+
+model:
+  weight_averager:
+    name: ExpMovingAverager
+    decay: 0.9998
+
+  arch:
+    name: NanoDetPlus
+    backbone:
+      name: ShuffleNetV2
+      model_size: 1.0x
+      out_stages: [2, 3, 4]
+      activation: LeakyReLU
+
+    fpn:
+      name: GhostPAN
+      in_channels: [116, 232, 464]
+      out_channels: 96
+      kernel_size: 5
+      num_extra_level: 1
+      use_depthwise: true
+      activation: LeakyReLU
+
+    head:
+      name: NanoDetPlusHead
+      num_classes: 1
+      input_channel: 96
+      feat_channels: 96
+      stacked_convs: 2
+      kernel_size: 5
+      strides: [8, 16, 32, 64]
+      activation: LeakyReLU
+      reg_max: 7
+
+    aux_head:
+      name: NanoDetPlusHead
+      num_classes: 1
+      input_channel: 192
+      feat_channels: 192
+      stacked_convs: 4
+      kernel_size: 5
+      strides: [8, 16, 32, 64]
+      activation: LeakyReLU
+      reg_max: 7
+
+data:
+  train:
+    name: CocoDataset
+    img_path: D:/PLADICS/datasets_clean/merged_clean_dataset/images/train
+    ann_path: D:/PLADICS/datasets_clean/merged_clean_dataset/annotations/instances_train.json
+    input_size: [640, 640]
+    keep_ratio: true
+    pipeline:
+      perspective: 0.0
+      scale: [0.6, 1.4]
+      stretch: [[1, 1], [1, 1]]
+      rotation: 0
+      shear: 0
+      translate: 0.2
+      flip: 0.5
+      brightness: 0.2
+      contrast: 0.2
+      saturation: 0.2
+      normalize: [[103.53, 116.28, 123.675], [57.375, 57.12, 58.395]]
+
+  val:
+    name: CocoDataset
+    img_path: D:/PLADICS/datasets_clean/merged_clean_dataset/images/val
+    ann_path: D:/PLADICS/datasets_clean/merged_clean_dataset/annotations/instances_val.json
+    input_size: [640, 640]
+    keep_ratio: true
+    pipeline:
+      normalize: [[103.53, 116.28, 123.675], [57.375, 57.12, 58.395]]
+
+device:
+  gpu_ids: -1
+  workers_per_gpu: 0
+  batchsize_per_gpu: 8
+
+schedule:
+  optimizer:
+    name: AdamW
+    lr: 0.001
+    weight_decay: 0.05
+
+  warmup:
+    name: linear
+    steps: 500
+    ratio: 0.001
+
+  total_epochs: 50
+
+class_names: ["plastic"]
+
+evaluator:
+  name: CocoDetectionEvaluator
+
+log:
+  interval: 50

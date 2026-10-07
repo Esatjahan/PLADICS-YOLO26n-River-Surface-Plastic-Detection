@@ -1,0 +1,125 @@
+class_names:
+- plastic
+data:
+  train:
+    ann_path: D:/PLADICS/datasets_clean/merged_clean_dataset/annotations/instances_train.json
+    img_path: D:/PLADICS/datasets_clean/merged_clean_dataset/images/train
+    input_size:
+    - 640
+    - 640
+    keep_ratio: true
+    name: CocoDataset
+    pipeline:
+      brightness: 0.2
+      contrast: 0.2
+      flip: 0.5
+      normalize:
+      - - 103.53
+        - 116.28
+        - 123.675
+      - - 57.375
+        - 57.12
+        - 58.395
+      perspective: 0.0
+      rotation: 0
+      saturation: 0.2
+      scale:
+      - 0.6
+      - 1.4
+      shear: 0
+      stretch:
+      - - 1
+        - 1
+      - - 1
+        - 1
+      translate: 0.2
+  val:
+    ann_path: D:/PLADICS/datasets_clean/merged_clean_dataset/annotations/instances_val.json
+    img_path: D:/PLADICS/datasets_clean/merged_clean_dataset/images/val
+    input_size:
+    - 640
+    - 640
+    keep_ratio: true
+    name: CocoDataset
+    pipeline:
+      normalize:
+      - - 103.53
+        - 116.28
+        - 123.675
+      - - 57.375
+        - 57.12
+        - 58.395
+device:
+  batchsize_per_gpu: 8
+  gpu_ids: -1
+  precision: 32
+  workers_per_gpu: 0
+evaluator:
+  name: CocoDetectionEvaluator
+log:
+  interval: 50
+model:
+  arch:
+    aux_head:
+      activation: LeakyReLU
+      feat_channels: 192
+      input_channel: 192
+      kernel_size: 5
+      name: NanoDetPlusHead
+      num_classes: 1
+      reg_max: 7
+      stacked_convs: 4
+      strides:
+      - 8
+      - 16
+      - 32
+      - 64
+    backbone:
+      activation: LeakyReLU
+      model_size: 1.0x
+      name: ShuffleNetV2
+      out_stages:
+      - 2
+      - 3
+      - 4
+    fpn:
+      activation: LeakyReLU
+      in_channels:
+      - 116
+      - 232
+      - 464
+      kernel_size: 5
+      name: GhostPAN
+      num_extra_level: 1
+      out_channels: 96
+      use_depthwise: true
+    head:
+      activation: LeakyReLU
+      feat_channels: 96
+      input_channel: 96
+      kernel_size: 5
+      name: NanoDetPlusHead
+      num_classes: 1
+      reg_max: 7
+      stacked_convs: 2
+      strides:
+      - 8
+      - 16
+      - 32
+      - 64
+    name: NanoDetPlus
+  weight_averager:
+    decay: 0.9998
+    name: ExpMovingAverager
+save_dir: workspace/pladics_nanodet
+schedule:
+  optimizer:
+    lr: 0.001
+    name: AdamW
+    weight_decay: 0.05
+  total_epochs: 50
+  warmup:
+    name: linear
+    ratio: 0.001
+    steps: 500
+test: {}
